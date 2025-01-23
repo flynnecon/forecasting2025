@@ -1,0 +1,3 @@
+*Forecast model for ND oil prices (nsa). 
+
+import delimited https://raw.githubusercontent.com/flynnecon/forecasting2025/main/emp-202401.csv, clear
