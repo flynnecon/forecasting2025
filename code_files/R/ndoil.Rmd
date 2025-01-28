@@ -26,8 +26,8 @@ library(report)
 library(readr)
 urlfile="https://raw.githubusercontent.com/flynnecon/forecasting2025/main/ndoil.csv"
 ```
-#Getting the data read into R and then made into our time series analysis format. Note we do not need a training or test data division with the fact we are looking at a forecast 1 period ahead.
-```{r Employment data work}
+#Getting the data read into R and then made into our time series analysis format. 
+```{r ND oil data setup}
 nddata <- read_csv(url(urlfile))
 nddata <- nddata[-c(1)]
 nddata$date <- seq(as.Date("1981-01-01"), as.Date("2024-10-01"), by="1 month")
