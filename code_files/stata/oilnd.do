@@ -12,6 +12,6 @@ format sdate %tm
 tsset sdata
 
 *We can now take a look at this as a time series graph with time series commands. 
-tsline 
+tsline ndfpp
 
 
