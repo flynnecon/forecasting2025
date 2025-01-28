@@ -5,7 +5,13 @@ import delimited https://raw.githubusercontent.com/flynnecon/forecasting2025/ref
 
 *Now we need to look fix the date portion. 
 
-gen sdate = tm() + _n-1
+gen sdate = tm(1981m1) + _n-1
 format sdate %tm
+*This generates a Stata readable date that also makes sense for us as users. Next we get this put into Stata as time series data. 
+
+tsset sdata
+
+*We can now take a look at this as a time series graph with time series commands. 
+tsline 
 
 
