@@ -1,3 +1,9 @@
+---
+title: "ND Oil Forecast"
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
 
 
 #Setting up the various packages we might use to make our forecast. 
@@ -18,12 +24,12 @@ library(ggpubr)
 library(reshape2)
 library(report)
 library(readr)
-urlfile="https://raw.githubusercontent.com/flynnecon/forecasting2024/main/emp-202401.csv"
+urlfile="https://raw.githubusercontent.com/flynnecon/forecasting2025/main/ndoil.csv"
 ```
 #Getting the data read into R and then made into our time series analysis format. Note we do not need a training or test data division with the fact we are looking at a forecast 1 period ahead.
 ```{r Employment data work}
-empdata202402 <- read_csv(url(urlfile))
-empdata202402 <- empdata202402[-c(1)]
-empdata202402$date <- seq(as.Date("2014-01-01"), as.Date("2024-01-01"), by="1 month")
-emp_tsbl202402 <- empdata202402 |> mutate(month=yearmonth(date)) |> as_tsibble(index=month)
+nddata <- read_csv(url(urlfile))
+nddata <- nddata[-c(1)]
+nddata$date <- seq(as.Date("1981-01-01"), as.Date("2024-10-01"), by="1 month")
+ndoil_tsbl <- nddata |> mutate(month=yearmonth(date)) |> as_tsibble(index=month)
 ```
