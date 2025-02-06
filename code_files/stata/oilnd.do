@@ -14,7 +14,8 @@ tsset sdata
 *We can now take a look at this as a time series graph with time series commands. 
 tsline ndfpp
 
-gen yrdate = yofd(observation_date)
+* This line will need a little editing. I think the format of the date in the CSV file is a problem so we will tinker with this in class. 
+gen yrdate = yofd(Date)
 separate ndfpp, by(yrdate)
-gen month = month(observation_date)
+gen month = month(Date)
 twoway line retail**** month if yrdate>=2016, legend(off) c(L) sy()
