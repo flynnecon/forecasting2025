@@ -26,10 +26,41 @@ library(report)
 library(readr)
 urlfile="https://raw.githubusercontent.com/flynnecon/forecasting2025/main/data_files/ndoil.csv"
 ```
-#Getting the data read into R and then made into our time series analysis format. 
+## Reading in the data
+
+Getting the data read into R and then made into our time series analysis format is a bit of a personal prefrence. There are lots of ways to do it and the order may, or may not, matter but it is something we need to do and make sure the outcome works. 
+
 ```{r ND oil data setup}
 nddata <- read_csv(url(urlfile))
 nddata <- nddata[-c(1)]
 nddata$date <- seq(as.Date("1981-01-01"), as.Date("2024-10-01"), by="1 month")
 ndoil_tsbl <- nddata |> mutate(month=yearmonth(date)) |> as_tsibble(index=month)
 ```
+
+## Basic Time Plot
+Making a basic time plot is pretty straigthforward once we hvae the *tsibble* objects created. 
+```{r Basic time series plot}
+ndoil_tsbl |> ggplot(aes(x=date,y=ndfpp)) + geom_line(color="darkgreen") + theme_bw()
+```
+There are all sorts of bells and whistles we can use here but for now we will move on. I encourage you to look at those when you have some spare time. 
+
+## Season Plots
+Season plots are a key aspect of our work. They help us display patterns in the data related to the construct of calendar time, concvetionally called *seasonality*. *Seasonality* is important to highlight because even independent of any other serious analysis you are able to arrive at conclusions or policy recommendations. 
+
+With that in mind we start with the basic season plot. 
+
+```{r Basic Season Plot}
+ndoil_tsbl |> gg_season(ndfpp, labels="both") + labs( y= "$", title="North Dakoa Oil Prices")
+```
+There are too many lines here though because we have too much data so we need to *filter* the data somehow. 
+```{r Filtered Season Plot}
+ndoil_tsbl|> filter(year(date) > 2004) |> gg_season(y=ndfpp,labels="both") + labs(y="$", title = "North Dakota Oil Prices")
+```
+With this type of breakdown we are able to observe patterns in the data, if they exist, and changes in patterns over time. 
+
+### Sub season plots
+A different type of plot within the classification of *season plots* is the **subseason plot**. This gives us the plot for the month across the data set, yet a different way to view the data. 
+```{r Filtered Subseason Plot}
+ndoil_tsbl|> filter(year(date) > 2004) |> gg_subseries(y=ndfpp) + labs(y="$", title = "North Dakota Oil Prices")
+```
+The plot here shows the values for the month of each year and then the mean value so we can look at what happens to the average value over time. 
