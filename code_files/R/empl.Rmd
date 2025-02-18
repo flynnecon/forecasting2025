@@ -33,8 +33,27 @@ Getting the data read into R and then made into our time series analysis format 
 empdata <- read_csv(url(urlfile))
 ```
 
-
-empdata <- nddata[-c(1)]
-empdata$date <- seq(as.Date("1981-01-01"), as.Date("2024-10-01"), by="1 month")
-ndoil_tsbl <- nddata |> mutate(month=yearmonth(date)) |> as_tsibble(index=month)
+```{r Employment data setup}
+empdata <- read_csv(url(urlfile))
+empdata <- empdata |> mutate(time = yearmonth(statdate)) |> as_tsibble(key=region,index=time)
 ```
+
+
+
+```{r US plot}
+empdata |> filter(region=="usa") |> ggplot(aes(x=time,y=employ)) + geom_line(color="blue")
+```
+
+
+```{r ND plot}
+empdata |> filter(region=="nd") |> ggplot(aes(x=time,y=employ)) + geom_line(color="darkgreen")
+```
+
+
+```{r}
+lambda <- empdata |> filter(region=="usa") |> features(employ,features=guerrero) |> pull(lambda_guerrero)
+empdata |>filter(region=="usa") |> autoplot(box_cox(employ,lambda))
+```
+
+
+
