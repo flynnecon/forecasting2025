@@ -18,3 +18,21 @@ tsset date2
 tssmooth ma ma_nd = employnd, window(2 1 2) replace
 
 tsline employnd ma_nd
+
+*Model 1 for forecast
+ucm employnd, model(rtrend) seasonal(12)
+estimates store model1
+predict fc1
+predict fc2, dynamic(tm(2024m1))
+predict trendest1, trend
+predict seasonest1, season
+
+*Model 2 for forecast
+*This model fails to converge, at least when I run it. I let it go for nearly 300 iterations with little change in convergence criteria. This is a sign of a model that might not be running appropriately. 
+ucm employnd, model(strend) seasonal(12)
+estimates store model2
+predict fc3
+predict fc4, dynamic(tm(2024m1))
+
+
+
