@@ -24,8 +24,9 @@ library(ggpubr)
 library(reshape2)
 library(report)
 library(readr)
-urlfileq3="https://raw.githubusercontent.com/flynnecon/forecasting2025/main/data_files/usndemploy.csv"
-urlfileq4=
+urlfileq3= "https://raw.githubusercontent.com/flynnecon/forecasting2025/refs/heads/main/data_files/ndoil.csv"
+urlfileq4= "https://raw.githubusercontent.com/flynnecon/forecasting2025/refs/heads/main/data_files/ndoil.csv"
+urlfileq6 = "https://raw.githubusercontent.com/flynnecon/forecasting2025/main/data_files/usndemploy.csv"
 ```
 #Getting the data read into R and then made into our time series analysis format. 
 ## Reading in the data
