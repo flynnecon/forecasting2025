@@ -1,1 +1,40 @@
+---
+title: "Employment Forecast"
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+#Setting up the various packages we might use to make our forecast. 
+```{r}
+library(tidyverse)
+library(fpp3)
+library(dplyr)
+library(readxl)
+library(tidyr)
+library(tsibble)
+library(tsibbledata)
+library(lubridate)
+library(feasts)
+library(fable)
+library(knitr)
+library(ggstream)
+library(ggpubr)
+library(reshape2)
+library(report)
+library(readr)
+urlfile="https://raw.githubusercontent.com/flynnecon/forecasting2025/main/data_files/usndemploy.csv"
+```
+#Getting the data read into R and then made into our time series analysis format. 
+## Reading in the data
+Getting the data read into R and then made into our time series analysis format is a bit of a personal prefrence. There are lots of ways to do it and the order may, or may not, matter but it is something we need to do and make sure the outcome works. 
+```{r ND oil data setup}
+empdata <- read_csv(url(urlfile))
+```
+
+```{r Employment data setup}
+empdata <- read_csv(url(urlfile))
+empdata <- empdata |> mutate(time = yearmonth(statdate)) |> as_tsibble(key=region,index=time)
+```
 
