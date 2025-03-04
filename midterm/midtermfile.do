@@ -7,5 +7,7 @@
 import delimited https://raw.githubusercontent.com/flynnecon/forecasting2025/refs/heads/main/data_files/ndoil.csv, clear
 
 
+*Question 6 Download
+import delimited https://raw.githubusercontent.com/flynnecon/forecasting2025/refs/heads/main/data_files/usndemploy.csv, clear
 
 
