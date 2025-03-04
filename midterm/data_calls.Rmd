@@ -1,5 +1,5 @@
 ---
-title: "Employment Forecast"
+title: "Midterm Notebook - Yournamehere"
 output: html_notebook
 editor_options: 
   chunk_output_type: inline
@@ -24,7 +24,8 @@ library(ggpubr)
 library(reshape2)
 library(report)
 library(readr)
-urlfile="https://raw.githubusercontent.com/flynnecon/forecasting2025/main/data_files/usndemploy.csv"
+urlfileq3="https://raw.githubusercontent.com/flynnecon/forecasting2025/main/data_files/usndemploy.csv"
+urlfileq4=
 ```
 #Getting the data read into R and then made into our time series analysis format. 
 ## Reading in the data
