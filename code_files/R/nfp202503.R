@@ -25,7 +25,7 @@ library(ggpubr)
 library(reshape2)
 library(report)
 library(readr)
-urlfile="https://raw.githubusercontent.com/flynnecon/forecasting2025/main/nfp-20250401.csv"
+urlfile="https://raw.githubusercontent.com/flynnecon/forecasting2025/refs/heads/main/data_files/nfp-20250401.csv"
 ```
 #Getting the data read into R and then made into our time series analysis format. Note we do not need a training or test data division with the fact we are looking at a forecast 1 period ahead.
 ```{r Employment data work}
