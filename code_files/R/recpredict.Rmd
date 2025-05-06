@@ -1,0 +1,44 @@
+---
+title: "Recession Prediction Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+```{r}
+library(tidyverse)
+library(fpp3)
+library(dplyr)
+library(readxl)
+library(tidyr)
+library(tsibble)
+library(tsibbledata)
+library(lubridate)
+library(feasts)
+library(fable)
+library(knitr)
+library(ggstream)
+library(ggpubr)
+library(reshape2)
+library(readr)
+urlfile="https://raw.githubusercontent.com/flynnecon/forecasting2025/refs/heads/main/data_files/recmodel.csv"
+```
+
+```{r data prep}
+recdata <- read_csv(url(urlfile))
+recdata$spread <- recdata$gs10 - recdata$gs3m
+time <- seq(as.Date("1960-01-01"),as.Date("2025-04-01"),by="1 month")
+rec_tsbl <- recdata |> mutate(time=yearmonth(time)) |> as_tsibble(index=time)
+usable <- rec_tsbl |> filter(time >= yearmonth("1986 Jan"))
+usable |> ggplot(aes(x=time,y=spread)) + geom_line()
+```
+
+
+
+```{r logit}
+recfit1 <- glm(recess ~ spread + uer,family="binomial", data=usable)
+summary(recfit1)
+```
+
+
