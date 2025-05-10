@@ -1,1 +1,29 @@
+---
+title: "Final Exam - Your Name"
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+
+#Setting up the various packages we might use to make our forecast. 
+```{r}
+library(tidyverse)
+library(fpp3)
+library(dplyr)
+library(readxl)
+library(tidyr)
+library(tsibble)
+library(tsibbledata)
+library(lubridate)
+library(feasts)
+library(fable)
+library(knitr)
+library(ggstream)
+library(ggpubr)
+library(reshape2)
+library(readr)
+#urlfile="D:\teaching\Econ 411\wti_exam.csv"
+```
 
