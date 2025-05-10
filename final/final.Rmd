@@ -24,6 +24,12 @@ library(ggstream)
 library(ggpubr)
 library(reshape2)
 library(readr)
-#urlfile="D:\teaching\Econ 411\wti_exam.csv"
+library(urca)
+urlfile="https://raw.githubusercontent.com/flynnecon/forecasting2025/refs/heads/main/final/wti_exam.csv"
 ```
 
+```{r Employment data work}
+examdata <- read_csv(url(urlfile))
+examdata$date <- seq(as.Date("1986-01-01"),as.Date("2025-03-01"),by="1 month")
+examdata_ts <- examdata |> mutate(rdate = yearmonth(date)) |> as_tsibble(index=rdate)
+```
